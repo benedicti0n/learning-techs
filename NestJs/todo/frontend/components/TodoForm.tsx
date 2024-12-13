@@ -1,36 +1,39 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react';
 
 const TodoForm = () => {
-    const [title, setTitle] = React.useState('');
-    const [description, setDescription] = React.useState('');
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle form submission logic here
-        console.log({ title, description });
+        const response = await fetch('/api/todos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title, description }),
+        });
+        if (response.ok) {
+            setTitle('');
+            setDescription('');
+        }
     };
 
     return (
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 border rounded shadow-md">
+        <form onSubmit={handleSubmit}>
             <input
                 type="text"
                 placeholder="Title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded mb-4"
             />
             <textarea
                 placeholder="Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded mb-4"
             />
-            <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-                Add Todo
-            </button>
+            <button type="submit">Add Todo</button>
         </form>
-    )
-}
+    );
+};
 
-export default TodoForm
+export default TodoForm;

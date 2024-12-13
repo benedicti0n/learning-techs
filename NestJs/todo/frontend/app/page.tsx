@@ -1,9 +1,9 @@
-import TodoForm from "@/components/TodoForm";
+import HomePage from "@/components/Home";
 
 export default function Home() {
   return (
     <div>
-      <TodoForm />
+      <HomePage />
     </div>
   );
 }
