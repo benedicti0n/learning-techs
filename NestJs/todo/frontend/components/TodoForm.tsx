@@ -19,19 +19,23 @@ const TodoForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="border-2 border-gray-300 p-6 rounded shadow-md">
             <input
                 type="text"
                 placeholder="Title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                className="border border-gray-300 p-2 rounded w-full mb-4"
             />
             <textarea
                 placeholder="Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                className="border border-gray-300 p-2 rounded w-full mb-4"
             />
-            <button type="submit">Add Todo</button>
+            <button type="submit" className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+                Add Todo
+            </button>
         </form>
     );
 };
